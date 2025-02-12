@@ -12,15 +12,4 @@ function redirect($url)
     die();
 }
 
-function get_term($term)
-{
-    $terms = get_terms();
 
-    foreach ($terms as $item) {
-        if ($item->term == $term) {
-            return $item;
-        }
-    }
-
-    return false;
-}
