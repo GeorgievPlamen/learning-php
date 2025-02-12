@@ -1,17 +1,34 @@
 <?php
+session_start();
+require_once("../includes/config.php");
+require_once("../includes/functions.php");
+
 $title = "POST Input";
 
-include("../includes/header.php");
-require_once("../includes/functions.php");
+if (is_user_authenticated()) {
+    redirect('admin.php');
+    die();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = $_POST['password'];
+
+    // compare with data store
+    if (authenticate_user($email, $password)) {
+        $_SESSION['email'] = $email;
+        redirect('admin.php');
+        die();
+    } else {
+        $status = "The provided credentials didn't work";
+    }
 
     if ($email == false) {
         $status = "Please eneter a valid email";
     }
 }
 
+include("../includes/header.php");
 ?>
 <div class="container">
     <div class="row">
