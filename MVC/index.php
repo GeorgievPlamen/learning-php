@@ -1,9 +1,10 @@
 <?php
-require('functions.php');
-$title = 'hello, world';
+require('app/app.php');
 
-$view_bag = [];
+$data = get_data();
 
-$view_bag['title'] = 'Hello, World Title';
+// $view_bag = [];
 
-view('index', $title);
+// $view_bag['title'] = 'Hello, World Title';
+
+view('index', $data);
