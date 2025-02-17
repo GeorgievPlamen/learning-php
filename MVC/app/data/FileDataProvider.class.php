@@ -1,19 +1,12 @@
 <?php
 
-require_once('GlossaryTerms.class.php');
-
-class FileDataProdiver
+class FileDataProdiver extends DataProvider
 {
-    public $file_path;
-
-    function __construct($file_path)
-    {
-        $this->file_path = $file_path;
-    }
+    public $source;
 
     function get_data()
     {
-        $fname = $this->file_path;
+        $fname = $this->source;
 
         $json = '';
 
@@ -118,6 +111,6 @@ class FileDataProdiver
     {
         $json = json_encode($arr);
 
-        file_put_contents($this->file_path, $json);
+        file_put_contents($this->source, $json);
     }
 }
