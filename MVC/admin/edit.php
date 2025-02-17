@@ -5,7 +5,7 @@ ensure_user_is_authenticated();
 
 if (is_get()) {
     $key = sanitize($_GET['key']);
-    $term = get_term($key);
+    $term = Data::get_term($key);
 
     if (empty($key) || $term === false) {
         view('not_found');
@@ -23,7 +23,7 @@ if (is_post()) {
     if (empty($term) || empty($definition) || empty($original_term)) {
         // TODO: display msg
     } else {
-        update_term($original_term, $term, $definition);
+        Data::update_term($original_term, $term, $definition);
         redirect('index.php');
     }
 }
