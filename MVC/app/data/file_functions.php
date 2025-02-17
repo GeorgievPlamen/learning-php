@@ -85,6 +85,22 @@ function update_term($original_term, $new_term, $definition)
     set_data($terms);
 }
 
+function delete_term($term)
+{
+    $terms = get_terms();
+
+    for ($i = 0; $i < count($terms); $i++) {
+        if ($terms[$i]->term === $term) {
+            unset($terms[$i]);
+            break;
+        }
+    }
+
+    $new_terms = array_values($terms);
+
+    set_data($new_terms);
+}
+
 function set_data($arr)
 {
     $fname = CONFIG['data_file'];

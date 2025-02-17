@@ -4,9 +4,6 @@ require('../app/app.php');
 echo is_post();
 
 if (is_post()) {
-
-    echo 'Hello';
-
     $term = sanitize($_POST['term']);
     $definition = sanitize($_POST['definition']);
 
