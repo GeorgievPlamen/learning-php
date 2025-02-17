@@ -70,6 +70,21 @@ function add_term($term, $definition)
     set_data($items);
 }
 
+function update_term($original_term, $new_term, $definition)
+{
+    $terms = get_terms();
+
+    foreach ($terms as $item) {
+        if ($item->term == $original_term) {
+            $item->term = $new_term;
+            $item->definition = $definition;
+            break;
+        }
+    }
+
+    set_data($terms);
+}
+
 function set_data($arr)
 {
     $fname = CONFIG['data_file'];
