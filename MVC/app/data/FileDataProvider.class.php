@@ -1,5 +1,7 @@
 <?php
 
+require_once("DataProvider.class.php");
+
 class FileDataProdiver extends DataProvider
 {
     public $source;
@@ -9,6 +11,8 @@ class FileDataProdiver extends DataProvider
         $fname = $this->source;
 
         $json = '';
+
+        echo $fname;
 
         if (!file_exists($fname)) {
             file_put_contents($fname, '');
