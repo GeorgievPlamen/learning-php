@@ -27,7 +27,34 @@ class MySqlDataProvider extends DataProvider
         return $data;
     }
 
-    function get_term($term) {}
+    function get_term($term)
+    {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return;
+        }
+
+        $sql = 'SELECT * FROM terms WHERE id = :id';
+        $smt = $db->prepare($sql);
+
+        $smt->execute([
+            ':id' => $term,
+        ]);
+
+        $data = $smt->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerms');
+
+        if (empty($data)) {
+            $smt = null;
+            $db = null;
+            return;
+        }
+
+        $smt = null;
+        $db = null;
+
+        return $data[0];
+    }
 
     function search_terms($search) {}
 
