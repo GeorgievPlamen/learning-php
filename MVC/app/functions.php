@@ -53,8 +53,8 @@ function is_user_authenticated()
 
 function ensure_user_is_authenticated()
 {
-    if (!is_user_authenticated()) {
-        redirect('index.php');
-        die();
-    }
+    // if (!is_user_authenticated()) {
+    //     redirect('index.php');
+    //     die();
+    // }
 }

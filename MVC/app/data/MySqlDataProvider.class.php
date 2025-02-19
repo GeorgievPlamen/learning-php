@@ -16,16 +16,34 @@ class MySqlDataProvider extends DataProvider
 
     function search_terms($search) {}
 
-    function add_term($term, $definition) {}
+    function add_term($term, $definition)
+    {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return;
+        }
+
+        $sql = 'INSERT INTO terms (term, definition) VALUES (:term, :definition)';
+        $smt = $db->prepare($sql);
+
+        $smt->execute([
+            ':term' => $term,
+            ':definition' => $definition
+        ]);
+
+        $smt = null;
+        $db = null;
+    }
 
     function update_term($original_term, $new_term, $definition) {}
 
     function delete_term($term) {}
 
-    function connect()
+    private function connect()
     {
         try {
-            return new PDO($this->source, CONFIG['db_user'], CONFIG['dB_password']);
+            return new PDO(CONFIG['db'], CONFIG['db_user'], CONFIG['db_password']);
         } catch (PDOException $e) {
             echo $e;
         }
