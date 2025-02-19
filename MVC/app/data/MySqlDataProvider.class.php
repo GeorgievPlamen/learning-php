@@ -12,19 +12,7 @@ class MySqlDataProvider extends DataProvider
 
     function get_terms()
     {
-        $db = $this->connect();
-
-        if ($db == null) {
-            return [];
-        }
-
-        $query = $db->query('SELECT id, term, definition FROM terms');
-
-        $data = $query->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerms');
-
-        $db = null;
-
-        return $data;
+        return $this->query('SELECT * FROM terms');
     }
 
     function get_term($term)
@@ -112,5 +100,22 @@ class MySqlDataProvider extends DataProvider
         } catch (PDOException $e) {
             echo $e;
         }
+    }
+
+    private function query($sql)
+    {
+        $db = $this->connect();
+
+        if ($db == null) {
+            return [];
+        }
+
+        $query = $db->query($sql);
+
+        $data = $query->fetchAll(PDO::FETCH_CLASS, 'GlossaryTerms');
+
+        $db = null;
+
+        return $data;
     }
 }
